@@ -8,6 +8,6 @@
    M-x package-install <Return> mozc  
    M-x package-install <Return> neotree  
    M-x package-install <Return> hiwin  
-   M-x package-install <Return> whitespacenn 
+   M-x package-install <Return> whitespace  
    M-x package-install <Return> atom-one-dark-theme  
 
