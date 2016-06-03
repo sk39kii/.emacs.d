@@ -15,6 +15,8 @@
 (when (not (require 'use-package nil t))
   (package-install 'use-package))
 
+(setq use-package-always-pin "melpa-stable")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; auto-install.el
@@ -81,7 +83,9 @@
 	'((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
   (global-whitespace-mode 1))
 
-			   
+;; 範囲選択してdelete or backspace 
+(delete-selection-mode t)
+
 ;; Global Keymap
 (use-package bind-key
   :config
