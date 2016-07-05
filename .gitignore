@@ -1,6 +1,9 @@
 elpa
 auto-save-list
 init.el~
+.DS_Store
+themes/
 
 !init.el
 !README.md
+
