@@ -124,7 +124,7 @@
   (set-face-attribute 'default nil :family "MeiryoKe_Gothic" :height 110)
   (set-fontset-font nil	'japanese-jisx0208
 		    (font-spec :family "MeiryoKe_Console"))
-  (setq face-font-rescale-alist '(("MeiryoKe_Console" . 1.2))))
+  (setq face-font-rescale-alist '(("MeiryoKe_Console" . 1.0))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -187,3 +187,8 @@
 		      '((:command . "python2"))
 		      :override t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Markdown
+;;;
+(use-package markdown-mode)
