@@ -33,7 +33,7 @@
 ;;; Emacs basic configurations
 ;;;
 
-;; mozc
+;;; mozc
 (use-package mozc
   :if (eq system-type 'gnu/linux)
   :config
@@ -42,14 +42,14 @@
   (prefer-coding-system 'utf-8)
   )
 
-;; 行番号、桁番号をモードラインに表示
+;;; 行番号、桁番号をモードラインに表示
 (line-number-mode t)
 (column-number-mode t)
-;; 行番号をフレームの左に表示
+;;; 行番号をフレームの左に表示
 (use-package linum)
 (global-linum-mode)
 
-;; OS Clipboard
+;;; OS Clipboard
 (setq x-select-enable-clipboard t)
 
 ;; ハイライト関連
@@ -57,7 +57,7 @@
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
-;; ディレクトリツリー関連
+;;; ディレクトリツリー関連
 (use-package neotree
   :config
   (global-set-key [f8] 'neotree-toggle)
@@ -65,13 +65,13 @@
   (setq neo-createfile-auto-open t)
   (setq neo-persist-show t))
 
-;; 非アクティブバッファの背景色
+;;; 非アクティブバッファの背景色
 (use-package hiwin
   :config
   (hiwin-activate)
   (set-face-background 'hiwin-face "color-237"))
 
-;; whitespace
+;;; whitespace
 (use-package whitespace
   :config
   (setq whitespace-style '(face
@@ -83,10 +83,25 @@
 	'((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
   (global-whitespace-mode 1))
 
-;; 範囲選択してdelete or backspace 
+;;; 範囲選択してdelete or backspace 
 (delete-selection-mode t)
 
-;; Global Keymap
+;;; タブ幅
+(setq default-tab-width 4)
+
+;;; カーソルそのままで一括インデント
+(require 'point-undo)
+(define-key global-map [f7] 'point-undo)
+(define-key global-map [S-f7] 'point-redo)
+
+(defun all-indent ()
+  (interactive)
+  (mark-whole-buffer)
+  (indent-region (region-beginning)(region-end))
+  (point-undo))
+(bind-key "C-x C-]" 'all-indent)
+
+;;; Global Keymap
 (use-package bind-key
   :config
   (bind-keys :map global-map
@@ -105,11 +120,37 @@
 	     ("C-c k" . windmove-up)
 	     ("C-c l" . windmove-right)))
 
-(setq default-tab-width 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; MacOSX
+;;; web-mode
+;;;
+(require 'web-mode)
+
+;;; 適用する拡張子
+(add-to-list 'auto-mode-alist '("\\.phtml$"     . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp$"       . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x$"   . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
+
+;;; インデント数
+(defun web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-html-offset    2)
+  (setq web-mode-css-offset     2)
+  (setq web-mode-script-offset  2)
+  (setq web-mode-php-offset     2)
+  (setq web-mode-java-offset    2)
+  (setq web-mode-asp-offset     2))
+(add-hook 'web-mode-hook 'web-mode-hook)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Macosx
 ;;;
 (when (eq system-type 'darwin)
   ;; command key -> meta
