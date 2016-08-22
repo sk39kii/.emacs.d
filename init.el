@@ -42,6 +42,9 @@
   (prefer-coding-system 'utf-8)
   )
 
+;;; バックアップファイルを~/.ehistに保存する
+(setq backup-directory-alist '((".*" . "~/.ehist")))
+
 ;;; 行番号、桁番号をモードラインに表示
 (line-number-mode t)
 (column-number-mode t)
