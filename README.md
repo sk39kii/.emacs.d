@@ -12,7 +12,6 @@
    M-x package-install <Return> atom-one-dark-theme  
    M-x package-install <Return> point-undo  
    M-x package-install <Return> web-mode  
-<<<<<<< HEAD
    M-x package-install <Return> py-autopep8
    M-x package-install <Return> flycheck
    M-x package-install <Return> flymake-python-pyflakes
@@ -23,6 +22,3 @@
 ## python
 pip install jedi epc autopep8 pyflakes
  
-=======
-   
->>>>>>> 169dda8204292fb1d0bf8554f41f76a2007bd74a
