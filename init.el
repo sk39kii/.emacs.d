@@ -7,7 +7,7 @@
 ;;;
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable". "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
@@ -41,6 +41,9 @@
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
   )
+
+;;; バックアップファイルを~/.ehistに保存する
+(setq backup-directory-alist '((".*" . "~/.ehist")))
 
 ;;; 行番号、桁番号をモードラインに表示
 (line-number-mode t)
