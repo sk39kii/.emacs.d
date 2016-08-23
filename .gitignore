@@ -3,6 +3,8 @@ auto-save-list
 init.el~
 .DS_Store
 themes/
+ac-comphist.dat
+semanticdb/
 
 !init.el
 !README.md

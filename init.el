@@ -3,11 +3,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; setup package.el
+;;; Setup package.el
 ;;;
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable". "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
@@ -212,26 +212,80 @@
 
 ;;; indent
 (add-hook 'python-mode-hook
-	  '(lambda ()
-	     (setq indent-tabs-mode nil)
-	     (setq indent-level 4)
-	     (setq python-indent 4)
-	     (setq tab-width 4)))
+		  (lambda ()
+			(setq indent-tabs-mode nil)
+			(setq indent-level 4)
+			(setq python-indent 4)
+			(setq tab-width 4)))
 
+;;; helm
 ;;; helm-etags-plus(tag jamp) $ ctags -o TAGS *.py
 ;;(require 'helm-etags+)
 
 ;;; imenu(function list)
 (semantic-mode 1)
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (setq imenu-create-index-funcfion 'python-imenu-create-index)))
+		  (lambda ()
+			(setq imenu-create-index-funcfion 'python-imenu-create-index)))
 
 ;;; quickxxparun(execute script)
 ;; M-x package-install quickrun
 (quickrun-add-command "python"
-		      '((:command . "python2"))
+		      '((:command . "python"))
 		      :override t)
+
+;;; autopep8
+(require 'py-autopep8)
+(setq py-autopep8-options '("--max-line-length=120"))
+(setq flycheck-flake8-maximun-line-length 120)
+(py-autopep8-enable-on-save)
+
+;;; pyflakes
+(flycheck-mode t)
+(require 'flymake-python-pyflakes)
+(flymake-python-pyflakes-load)
+
+;;; jedi
+(defvar jedi:goto-stack '())
+(defun jedi:jump-to-definition ()
+  (interactive)
+  (add-to-list 'jedi:goto-stack
+				(list (buffer-name) (point)))
+  (jedi:goto-definition))
+(defun jedi:jump-back ()
+  (interactive)
+  (let ((p (pop jedi:goto-stack)))
+	(if p ((progen )
+		   (switch-to-buffer (nth 0 p))
+		   (goto-char (nth 1 p))))))
+(jedi:setup)
+;; ウィンドウの移動
+(define-key jedi-mode-map (kbd "<C-tab>") nil)
+(setq jedi:complete-on-dot t)
+(define-key jedi-mode-map (kbd "C-j") 'jedi:complete)
+(define-key jedi-mode-map "." 'jedi:dot-complete)
+(setq ac-sources
+	  (delete 'ac-source-words-in-same-mode-buffers ac-sources))
+(add-to-list 'ac-sources 'ac-source-filename)
+(add-to-list 'ac-sources 'ac-source-jedi-direct)
+
+
+;;;閉じる括弧やクォートの補完
+(add-hook 'python-mode-hook
+		  (lambda ()
+			(define-key python-mode-map "\C-ct" 'jedi:jump-to-definition)
+			(define-key python-mode-map "\C-cb" 'jedi:jump-back)
+			(define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
+			(define-key python-mode-map "\"" 'electric-pair)
+			(define-key python-mode-map "\'" 'electric-pair)
+			(define-key python-mode-map "("  'electric-pair)
+			(define-key python-mode-map "["  'electric-pair)
+			(define-key python-mode-map "{"  'electric-pair)))
+(defun electric-pair ()
+  (interactive)
+  (let (parens-require-spaces)
+	(insert-pair)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
