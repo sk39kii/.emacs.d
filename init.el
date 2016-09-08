@@ -51,6 +51,7 @@
 ;;; 行番号をフレームの左に表示
 (use-package linum)
 (global-linum-mode)
+(setq linum-format "%5d ")
 
 ;;; OS Clipboard
 (setq x-select-enable-clipboard t)
