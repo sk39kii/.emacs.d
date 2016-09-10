@@ -158,7 +158,7 @@
 ;;;
 (when (eq system-type 'darwin)
   ;; command key -> meta
-  ;;(setq mac-command-modifier 'meta)
+  (setq mac-command-modifier 'meta)
   ;; ミニバッファにカーソル移動時 ASCIIモード
   ;;(mac-auto-ascii-mode 1)
   ;; Font settings
