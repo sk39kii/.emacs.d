@@ -244,6 +244,15 @@
 (setq flycheck-flake8-maximun-line-length 120)
 (py-autopep8-enable-on-save)
 
+;;; python-pep8
+(defcustom python-pep8-command "/usr/local/bin/pep8"
+    "PEP8 command."
+    :type '(file)
+    :group 'python-pep8)
+
+(when (load "python-pep8")
+    (define-key global-map "\C-c\ p" 'python-pep8))
+
 ;;; pyflakes
 (flycheck-mode t)
 (require 'flymake-python-pyflakes)
