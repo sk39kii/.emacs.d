@@ -5,6 +5,8 @@ init.el~
 themes/
 ac-comphist.dat
 semanticdb/
+*~
+\#*\#
 
 !init.el
 !README.md
