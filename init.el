@@ -56,10 +56,19 @@
 ;;; OS Clipboard
 (setq x-select-enable-clipboard t)
 
-;; ハイライト関連
+;;; ハイライト関連
 (global-hl-line-mode t)
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
+
+(defun global-hi-line-timer-function()
+    (global-hi-line-unhighlight-all)
+    (let ((global-hi-line-mode t))
+        (global-hi-line-highlight)))
+(setq global-hi-line-timer
+    (run-with-idle-timer 0.1 t 'global-hi-line-timer-function))
+    ;; (cancel-timer global-hi-line-timer)
+
 
 ;;; ディレクトリツリー関連
 (use-package neotree
