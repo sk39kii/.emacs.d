@@ -57,18 +57,25 @@
 (setq x-select-enable-clipboard t)
 
 ;;; ハイライト関連
-(global-hl-line-mode t)
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
-(defun global-hi-line-timer-function()
-    (global-hi-line-unhighlight-all)
-    (let ((global-hi-line-mode t))
-        (global-hi-line-highlight)))
-(setq global-hi-line-timer
-    (run-with-idle-timer 0.1 t 'global-hi-line-timer-function))
-    ;; (cancel-timer global-hi-line-timer)
+;;; 現在行のハイライト
+;;(global-hl-line-mode t)
 
+(require 'hl-line)
+(defun global-hl-line-timer-function()
+    (global-hl-line-unhighlight-all)
+    (let ((global-hl-line-mode t))
+        (global-hl-line-highlight)))
+(setq global-hl-line-timer
+    (run-with-idle-timer 0.1 t 'global-hl-line-timer-function))
+    ;; (cancel-timer global-hl-line-timer)
+
+;(require 'hl-line+)
+;(toggle-hl-line-when-idle)
+;(setq hl-line-idle-interval 3)
+(set-face-background 'hl-line "color-236")
 
 ;;; ディレクトリツリー関連
 (use-package neotree
@@ -85,16 +92,17 @@
   (set-face-background 'hiwin-face "color-237"))
 
 ;;; whitespace
-(use-package whitespace
-  :config
-  (setq whitespace-style '(face
-			   tabs
-			   space-mark
-			   tab-mark
-			   ))
-  (setq whitespace-display-mappings
-	'((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-  (global-whitespace-mode 1))
+;; カーソル行の描画がずれるのでコメントアウト
+;(use-package whitespace
+;  :config
+;  (setq whitespace-style '(face
+;			   tabs
+;			   space-mark
+;			   tab-mark
+;			   ))
+;  (setq whitespace-display-mappings
+;	'((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+;  (global-whitespace-mode 1))
 
 ;;; 範囲選択してdelete or backspace 
 (delete-selection-mode t)
