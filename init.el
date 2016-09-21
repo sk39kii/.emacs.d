@@ -329,3 +329,10 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; SSH
+;;; C-x C-f /ssh:user@hostname#port:.emacs.d/init.el
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
