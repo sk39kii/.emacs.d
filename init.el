@@ -336,3 +336,9 @@
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; org-mode
+;;;
+(setq org-use-speed-commands t)
+
