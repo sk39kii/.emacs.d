@@ -16,8 +16,9 @@
 ## python
 pip install jedi epc autopep8 pyflakes  
 
-   M-x package-install <Return> py-autopep8
-   M-x package-install <Return> flycheck
-   M-x package-install <Return> flymake-python-pyflakes
-   M-x package-install <Return> python-mode
-   M-x package-install <Return> jedi 
+   M-x package-install <Return> py-autopep8  
+   M-x package-install <Return> flycheck  
+   M-x package-install <Return> flymake-python-pyflakes  
+   M-x package-install <Return> python-mode  
+   M-x package-install <Return> jedi  
+
